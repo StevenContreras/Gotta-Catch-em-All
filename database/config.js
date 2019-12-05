@@ -1,5 +1,5 @@
 module.exports = {
     user: 'root',
-    password: 'plantlife0'
-    database: 'minteger'
+    password: 'plantlife0',
+    database: 'pokemon'
 };

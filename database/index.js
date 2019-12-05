@@ -10,3 +10,21 @@ db.connect((err) => {
     console.log("Connected to Database!")
   }
 })
+
+const response = (err, result, callback) => {
+  if (err) {
+    callback(err);
+  } else {
+    callback(null, result);
+  }
+};
+
+const getAllPokemon = function(callback) {
+  db.query(`SELECT * FROM team`, (err, result) => 
+    response(err, result, callback)
+  );
+};
+
+module.exports = {
+  getAllPokemon
+};

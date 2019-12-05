@@ -10,7 +10,7 @@ CREATE TABLE team (
   numero int NOT NULL,
   tipo varchar(20) NOT NULL,
   amount int NOT NULL,
-  img LONGBLOB NOT NULL,
+  img varchar(300),
   PRIMARY KEY (ID),
   CONSTRAINT UC_team UNIQUE (id, nombre, numero)
 );
