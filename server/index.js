@@ -10,8 +10,8 @@ app.use(parser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get("/allPokemon", (req, res) => {
-  db.getAllPokemon((err, data) => {
+app.get("/allPokemon/:id", (req, res) => {
+  db.getAllPokemon(req.params.id, (err, data) => {
     if (err) {
       console.error(err);
       res.status(404).send("error retrieving pokemon");
@@ -21,9 +21,9 @@ app.get("/allPokemon", (req, res) => {
   });
 });
 
-app.post("/capture", (req, res) => {
-  console.log(req.body);
-  db.capture(req.body, (err) => {
+app.post("/capture:id", (req, res) => {
+  console.log(req.params);
+  db.capture(req.params.id, req.body, (err) => {
     if (err) {
       res.status(406).send(err);
     } else {

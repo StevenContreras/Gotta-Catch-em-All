@@ -23,6 +23,8 @@ class App extends React.Component {
     this.setState({
       login: true
     });
+    this.getAllPokemon(this.state.info);
+    this.getRandomPoke();
   }
 
   infoType(e) {
@@ -33,16 +35,17 @@ class App extends React.Component {
   }
 
   pokeball(pokemon) {
+    console.log(this.state.info)
     if (this.randomizer(4) === 1) {
       alert("Pokemon Captured!")
-      axios.post("/capture", pokemon)
+      axios.post(`/capture${this.state.info}`, pokemon)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.error(err);
       })
-      this.getAllPokemon();
+      this.getAllPokemon(this.state.info);
       this.getRandomPoke();
     } else {
       alert("Failed to capture pokemon")
@@ -66,8 +69,8 @@ class App extends React.Component {
     .catch((err) => console.error(err));
   }
   
-  getAllPokemon() {
-    axios.get("/allPokemon")
+  getAllPokemon(user) {
+    axios.get(`/allPokemon/${user}`)
     .then(({data}) => {
       this.setState({
         pokeTeam: data
@@ -81,7 +84,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.getAllPokemon();
+    this.getAllPokemon(this.state.info);
     this.getRandomPoke();
   }
 
