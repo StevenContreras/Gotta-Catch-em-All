@@ -21,6 +21,17 @@ app.get("/allPokemon", (req, res) => {
   });
 });
 
+app.post("/capture", (req, res) => {
+  console.log(req.body);
+  db.capture(req.body, (err) => {
+    if (err) {
+      res.status(406).send(err);
+    } else {
+      res.status(202).send("Updated!")
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`server is listening on ${port}`);
 });

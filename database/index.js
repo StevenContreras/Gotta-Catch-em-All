@@ -25,6 +25,19 @@ const getAllPokemon = function(callback) {
   );
 };
 
+const capture = function(obj, callback) {
+  var query = `INSERT INTO team (nombre, numero, tipo, amount, img) VALUES("${obj.name}", ${obj.id}, "${obj.type}", 1, "${obj.img}") ON DUPLICATE KEY UPDATE amount = amount + 1`;
+  db.query(query, (err) => {
+    if (err) {
+      console.error(err);
+      callback(err);
+    } else {
+      callback(null, 'Updated!');
+    }
+  })
+}
+
 module.exports = {
-  getAllPokemon
+  getAllPokemon,
+  capture
 };

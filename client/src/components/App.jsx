@@ -15,11 +15,11 @@ class App extends React.Component {
   }
 
   randomizer(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
   };
 
   getRandomPoke() {
-    var rando = this.randomizer(151)
+    var rando = this.randomizer(150)
     axios.get(`https://pokeapi.co/api/v2/pokemon/${rando}/`)
     .then(({data}) => {
       var sorted = {};
