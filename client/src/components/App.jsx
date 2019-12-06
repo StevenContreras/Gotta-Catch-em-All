@@ -16,13 +16,20 @@ class App extends React.Component {
   }
 
   pokeball(pokemon) {
-    axios.post("/capture", pokemon)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+    if (this.randomizer(4) === 1) {
+      alert("Pokemon Captured!")
+      axios.post("/capture", pokemon)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      this.getAllPokemon();
+    } else {
+      alert("Failed to capture pokemon")
+      this.getRandomPoke();
+    }
   }
   
   getRandomPoke() {
