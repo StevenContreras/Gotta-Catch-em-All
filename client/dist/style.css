@@ -1,0 +1,9 @@
+body {
+  background-color: olivedrab;
+}
+
+.team {
+  float: left;
+  border-style: double;
+  background-color: navajowhite;
+}

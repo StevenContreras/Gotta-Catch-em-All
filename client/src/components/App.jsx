@@ -8,11 +8,28 @@ class App extends React.Component {
     super(props);
     this.state = {
       pokeTeam: [],
-      random: {}
+      random: {},
+      login: false,
+      info: ''
     };
     this.getAllPokemon = this.getAllPokemon.bind(this);
     this.getRandomPoke = this.getRandomPoke.bind(this);
     this.pokeball = this.pokeball.bind(this);
+    this.infoType = this.infoType.bind(this);
+    this.login = this.login.bind(this);
+  }
+
+  login() {
+    this.setState({
+      login: true
+    });
+  }
+
+  infoType(e) {
+    this.setState({
+      info: e.target.value
+    });
+    console.log(this.state.info);
   }
 
   pokeball(pokemon) {
@@ -26,6 +43,7 @@ class App extends React.Component {
         console.error(err);
       })
       this.getAllPokemon();
+      this.getRandomPoke();
     } else {
       alert("Failed to capture pokemon")
       this.getRandomPoke();
@@ -71,8 +89,23 @@ class App extends React.Component {
     return (
       <div>
         <h1>Pokemon</h1>
-        <RandomEncounter random={this.state.random} pokeball={this.pokeball}/>
-        <PoketeamMap pokeTeam={this.state.pokeTeam}/>
+        <div> 
+          {this.state.login ? (
+          <div>
+            <RandomEncounter random={this.state.random} pokeball={this.pokeball}/>
+            <PoketeamMap pokeTeam={this.state.pokeTeam}/>
+          </div>
+          ) : (
+          <div>
+            <h4>Please Login for your poketeam</h4>
+            <input
+            type="text" value={this.state.info} 
+            onChange={this.infoType} 
+            placehoder="Your Login info"></input>
+            <button onClick={this.login}>enter</button>
+          </div>
+          )}
+        </div>
       </div>
     )
   }
