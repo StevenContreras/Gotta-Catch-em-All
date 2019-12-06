@@ -1,9 +1,9 @@
 import React from 'react';
 
-const RandomEncounter = ({random}) => (
+const RandomEncounter = ({random, pokeball}) => (
     <div>
       <h2>Random Attack!</h2>
-      <button onClick={() => (console.log("Clicked"))}>
+      <button onClick={() => (pokeball(random))}>
         <h3>{random.name}</h3>
         <h4>Poke# {random.id}</h4>
         <h4>Type: {random.type}</h4>

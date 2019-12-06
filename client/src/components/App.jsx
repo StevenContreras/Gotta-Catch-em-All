@@ -12,12 +12,19 @@ class App extends React.Component {
     };
     this.getAllPokemon = this.getAllPokemon.bind(this);
     this.getRandomPoke = this.getRandomPoke.bind(this);
+    this.pokeball = this.pokeball.bind(this);
   }
 
-  randomizer(max) {
-    return Math.floor(Math.random() * Math.floor(max)) + 1;
-  };
-
+  pokeball(pokemon) {
+    axios.post("/capture", pokemon)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+  
   getRandomPoke() {
     var rando = this.randomizer(150)
     axios.get(`https://pokeapi.co/api/v2/pokemon/${rando}/`)
@@ -33,7 +40,7 @@ class App extends React.Component {
     })
     .catch((err) => console.error(err));
   }
-
+  
   getAllPokemon() {
     axios.get("/allPokemon")
     .then(({data}) => {
@@ -43,6 +50,10 @@ class App extends React.Component {
     })
     .catch((err) => console.error(err));
   }
+  
+  randomizer(max) {
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
+  };
 
   componentDidMount() {
     this.getAllPokemon();
@@ -53,7 +64,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Pokemon</h1>
-        <RandomEncounter random={this.state.random}/>
+        <RandomEncounter random={this.state.random} pokeball={this.pokeball}/>
         <PoketeamMap pokeTeam={this.state.pokeTeam}/>
       </div>
     )
